@@ -1,0 +1,6 @@
+[versions]
+kotlin = "1.7.20"
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+style = { id = "org.sourcegrade.style", version = "2.1.0" }

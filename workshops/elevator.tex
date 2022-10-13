@@ -2,15 +2,284 @@
 \RequirePackage{import}
 \subimport{../common}{preamble}
 \subimport{../common}{packages}
+\subimport{../common}{vars}
 \begin{document}
 
     \section{Kotlin}\label{sec:kotlin}
     \begin{frame}[c]
         \centering
         \Large
-        \textbf{Kotlin}
+        \includesvg[scale=3]{../pictures/Kotlin-logo-2021.svg}
+        \linebreak
+        \only<2->{\textit{In 5 minutes}}
     \end{frame}
 
-    \section{Kotlin}
+
+    \section{Was ist Kotlin?}\label{sec:was-ist-kotlin?}
+    \begin{frame}
+        \slidehead
+        \begin{itemize}[<+->]
+            \item Eine moderne Programmiersprache (2011) erst nur für die JVM gedacht
+            \item Entwickelt von JetBrains
+            \item Scripting support
+            \item \href{https://github.com/JetBrains/kotlin}{Open Source (Apache 2.0)}
+            \item Objektorientiert, imperativ, funktional
+            \item Interoperabel mit Java
+            \item Interoperabel mit C/C++ (via \href{https://kotlinlang.org/docs/native-overview.html}{Kotlin/Native})
+            \item Interoperabel mit JavaScript (via \href{https://kotlinlang.org/docs/js-overview.html}{Kotlin/JS})
+            \item Bewertet deine FOP Hausübung
+        \end{itemize}
+    \end{frame}
+
+
+    \section{Kotlin im Einsatz}\label{sec:kotlin-im-einsatz}
+
+    \subsection{Hello World}\label{subsec:hello-world}
+    \begin{frame}
+        \slidehead
+        \inputCode[]{
+            minted language=java,
+            title=\codeBlockTitle{HelloWorld.java},
+        }{\codeDir/java/HelloWorld.java}
+        \inputCode[]{
+            minted language=kotlin,
+            title=\codeBlockTitle{hello-world.kts},
+        }{\codeDir/kotlin/hello-world.kts}
+    \end{frame}
+
+    \subsection{Scripting}\label{subsec:scripting}
+    \begin{frame}
+        \slidehead
+        \begin{columns}[c]
+            \begin{column}{.5\textwidth}
+                \centering
+                \Large
+                \textbf{*.kt}
+                \vspace{1em}
+                \normalsize
+                \begin{itemize}
+                    \item Normalerweise eine \textbf{Klassen-Datei}
+                    \item Keine Anweisungen außerhalb von Klassen oder Funktionen
+                \end{itemize}
+                \only<2->{
+                    \inputCode[]{
+                        minted language=kotlin,
+                        title=\codeBlockTitle{hello-world.kt},
+                    }{\codeDir/kotlin/hello-world.kt}
+                }
+            \end{column}
+            \begin{column}{.5\textwidth}
+                \centering
+                \Large
+                \textbf{*.kts}
+                \vspace{1em}
+                \normalsize
+                \begin{itemize}
+                    \item \textbf{Skript-Datei}
+                    \item Anweisungen ohne Klassen oder Funktionen
+                \end{itemize}
+                \only<2->{
+                    \inputCode[]{
+                        minted language=kotlin,
+                        title=\codeBlockTitle{hello-world.kts},
+                    }{\codeDir/kotlin/hello-world.kts}
+                }
+            \end{column}
+        \end{columns}
+    \end{frame}
+
+    \subsection{Projekt Erstellung}\label{subsec:projekt-erstellung}
+    \begin{frame}
+        \slidehead
+        \large
+        \textbf{Wie kann man ein Kotlin-Projekt erstellen?}
+        \begin{itemize}[<+->]
+            \item Gradle init
+            \item IntelliJ setup wizard
+            \item Manuell
+        \end{itemize}
+        \only<4->{
+            \vspace{2em}
+            \centering
+            \large
+            \textbf{live-demo}
+        }
+    \end{frame}
+
+
+    \section{Kotlin Syntax}\label{sec:kotlin-syntax}
+    \begin{frame}[c]
+        \centering
+        \Large
+        \textbf{Syntax}
+    \end{frame}
+
+    \subsection{Variablen}\label{subsec:variablen}
+    \begin{frame}[c]
+        \slidehead
+        \begin{columns}[c]
+            \begin{column}{.5\textwidth}
+                \centering
+                \Large
+                \textbf{Impliziter Typ}
+                \normalsize
+                \inputCode[]{
+                    minted language=kotlin,
+                    title=\codeBlockTitle{variables-1a.kts},
+                }{\codeDir/kotlin/variables-1a.kts}
+            \end{column}
+            \begin{column}{.5\textwidth}
+                \only<2->{
+                    \centering
+                    \Large
+                    \textbf{Expliziter Typ}
+                    \normalsize
+                    \inputCode[]{
+                        minted language=kotlin,
+                        title=\codeBlockTitle{variables-2a.kts},
+                    }{\codeDir/kotlin/variables-2a.kts}
+                }
+            \end{column}
+        \end{columns}
+    \end{frame}
+
+    \subsection{String Templates}\label{subsec:string-templates}
+    \begin{frame}[c]
+        \slidehead
+        \begin{columns}[c]
+            \begin{column}{.5\textwidth}
+                \centering
+                \Large
+                \textbf{Impliziter Typ}
+                \normalsize
+                \inputCode[highlightlines={4}]{
+                    minted language=kotlin,
+                    title=\codeBlockTitle{variables-1a.kts},
+                }{\codeDir/kotlin/variables-1b.kts}
+            \end{column}
+            \begin{column}{.5\textwidth}
+                \centering
+                \Large
+                \textbf{Expliziter Typ}
+                \normalsize
+                \inputCode[highlightlines={4}]{
+                    minted language=kotlin,
+                    title=\codeBlockTitle{variables-2a.kts},
+                }{\codeDir/kotlin/variables-2b.kts}
+            \end{column}
+        \end{columns}
+    \end{frame}
+
+%    TODO: Add comparison to Java
+
+    \subsection{Funktionen}\label{subsec:functionen}
+    \begin{frame}[c]
+        \slidehead
+        \centering
+        \large
+        \textbf{Basic Function}
+        \vspace{1em}
+        \normalsize
+        \inputCode[]{
+            minted language=kotlin,
+            title=\codeBlockTitle{functions-1a.kts},
+        }{\codeDir/kotlin/functions-1a.kts}
+    \end{frame}
+
+    \begin{frame}[c]
+        \slidehead
+        \centering
+        \large
+        \textbf{Basic Function - Unit}
+        \vspace{1em}
+        \normalsize
+        \inputCode[]{
+            minted language=kotlin,
+            title=\codeBlockTitle{functions-1b.kts},
+        }{\codeDir/kotlin/functions-1b.kts}
+    \end{frame}
+
+    \begin{frame}[c]
+        \slidehead
+        \centering
+        \large
+        \textbf{Block Body}
+        \vspace{1em}
+        \normalsize
+        \inputCode[]{
+            minted language=kotlin,
+            title=\codeBlockTitle{functions-2.kts},
+        }{\codeDir/kotlin/functions-2.kts}
+    \end{frame}
+
+    \begin{frame}[c]
+        \slidehead
+        \centering
+        \large
+        \textbf{Expression Body}
+        \vspace{1em}
+        \normalsize
+        \inputCode[]{
+            minted language=kotlin,
+            title=\codeBlockTitle{functions-3.kts},
+        }{\codeDir/kotlin/functions-3a.kts}
+    \end{frame}
+
+    \begin{frame}[c]
+        \slidehead
+        \centering
+        \large
+        \textbf{Expression Body with implicit return type}
+        \vspace{1em}
+        \normalsize
+        \inputCode[]{
+            minted language=kotlin,
+            title=\codeBlockTitle{functions-3b.kts},
+        }{\codeDir/kotlin/functions-3b.kts}
+    \end{frame}
+
+    \begin{frame}[c]
+        \slidehead
+        \centering
+        \large
+        \textbf{Extension Functions}
+        \vspace{1em}
+        \inputCode[]{
+            minted language=kotlin,
+            title=\codeBlockTitle{functions-4-parameter.kts},
+        }{\codeDir/kotlin/functions-4-parameter.kts}
+        \only<2->{
+            \inputCode[]{
+                minted language=kotlin,
+                title=\codeBlockTitle{functions-4-receiver.kts},
+            }{\codeDir/kotlin/functions-4-receiver.kts}
+        }
+    \end{frame}
+
+    \begin{frame}[c]
+        \slidehead
+        \centering
+        \large
+        \textbf{Extension Functions Second Example}
+        \vspace{1em}
+        \normalsize
+        \inputCode[]{
+            minted language=kotlin,
+            title=\codeBlockTitle{list-receiver-example.kts},
+        }{\codeDir/kotlin/list-receiver-example.kts}
+    \end{frame}
+
+    \begin{frame}[c]
+        \slidehead
+        \centering
+        \large
+        \textbf{Nullability}
+        \vspace{1em}
+        \normalsize
+        \inputCode[]{
+            minted language=kotlin,
+            title=\codeBlockTitle{nullability.kts},
+        }{\codeDir/kotlin/nullability.kts}
+    \end{frame}
 
 \end{document}
