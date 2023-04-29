@@ -14,30 +14,466 @@
         \only<2->{\textit{DIY!}}
     \end{frame}
 
-    \section{Installation}\label{sec:installation}
+    \input{../common/content/facts.tex}
+
+    \section{Kotlin im Einsatz}\label{sec:kotlin-im-einsatz}
+
+    \subsection{Hello World}\label{subsec:hello-world}
+    \begin{frame}
+        \slidehead
+        \inputCode[]{
+            minted language=java,
+            title=\codeBlockTitle{HelloWorld.java},
+        }{\codeDir/java/HelloWorld.java}
+        \inputCode[]{
+            minted language=kotlin,
+            title=\codeBlockTitle{hello-world.kts},
+        }{\codeDir/kotlin/hello-world.kts}
+    \end{frame}
+
+    \subsection{Variablen}\label{subsec:variablen}
+    \begin{frame}[c]
+        \slidehead
+        \begin{columns}[c]
+            \begin{column}{.5\textwidth}
+                \centering
+                \Large
+                \textbf{Impliziter Typ}
+                \normalsize
+                \inputCode[]{
+                    minted language=kotlin,
+                    title=\codeBlockTitle{variables-1a.kts},
+                }{\codeDir/kotlin/variables-1a.kts}
+            \end{column}
+            \begin{column}{.5\textwidth}
+                \only<2->{
+                    \centering
+                    \Large
+                    \textbf{Expliziter Typ}
+                    \normalsize
+                    \inputCode[]{
+                        minted language=kotlin,
+                        title=\codeBlockTitle{variables-2a.kts},
+                    }{\codeDir/kotlin/variables-2a.kts}
+                }
+            \end{column}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}[c]
+        \slidehead
+        \centering
+        \large
+        \textbf{If-Statements}
+        \vspace{1em}
+        \normalsize
+        \inputCode[]{
+            minted language=kotlin,
+            title=\codeBlockTitle{if-statements.kts},
+        }{\codeDir/kotlin/if-statements.kts}
+    \end{frame}
+
+    \subsection{Funktionen}\label{subsec:functionen}
+    \begin{frame}[c]
+        \slidehead
+        \centering
+        \large
+        \textbf{Basic Function}
+        \vspace{1em}
+        \normalsize
+        \inputCode[]{
+            minted language=kotlin,
+            title=\codeBlockTitle{functions-1a.kts},
+        }{\codeDir/kotlin/functions-1a.kts}
+    \end{frame}
+
+    \begin{frame}[c]
+        \slidehead
+        \centering
+        \large
+        \textbf{Basic Function - Unit}
+        \vspace{1em}
+        \normalsize
+        \inputCode[]{
+            minted language=kotlin,
+            title=\codeBlockTitle{functions-1b.kts},
+        }{\codeDir/kotlin/functions-1b.kts}
+    \end{frame}
+
+    \begin{frame}[c]
+        \slidehead
+        \centering
+        \large
+        \textbf{Nullability}
+        \vspace{1em}
+        \normalsize
+        \inputCode[]{
+            minted language=kotlin,
+            title=\codeBlockTitle{nullability.kts},
+        }{\codeDir/kotlin/nullability.kts}
+    \end{frame}
+
+    \section{Challenge 1}\label{sec:challenge-1}
+
+    \begin{frame}
+        \slidehead
+        \Large
+        \centering
+        Erste Challenge
+        \only<2->{
+            \linebreak[2]
+            \Huge
+            Installation
+        }
+    \end{frame}
+
     \begin{frame}
         \slidehead
         \begin{itemize}[<+->]
             \item JetBrains ToolBox \url{jetbrains.com/toolbox}
             \item IntelliJ
             \item Kotlin Plugin
+            \item Clone https://gitlab.ofahrt-d120.de/alex/kotlin-workshop-code
         \end{itemize}
     \end{frame}
 
+    \section{Challenge 2 - Warm Up}\label{sec:challenge-2}
+    \begin{frame}[c]
+        \slidehead
+        \begin{columns}[c]
+            \begin{column}{.5\textwidth}
+                \Large
+                Fibonacci
+                \only<2->{
+                    \normalsize
+                    \begin{itemize}
+                        \item<2-> \texttt{fib(0) = 0}
+                        \item<3-> \texttt{fib(1) = 1}
+                        \item<4-> \texttt{fib(n) = fib(n-1) + fib(n-2)}
+                    \end{itemize}
+                }
+            \end{column}
+            \begin{column}{.5\textwidth}
+                \centering
+                \includesvg[scale=0.3]{../pictures/Fibonacci_Spiral}
+            \end{column}
+        \end{columns}
+    \end{frame}
 
-    \section{Challenge 1}\label{sec:challenge_1}
-    \begin{frame}
+    \section{When Statement}\label{sec:when-statement}
+
+    \subsection{No Subject}\label{subsec:no-subject}
+    \begin{frame}[c]
+        \slidehead
+        \centering
+        \large
+        \textbf{When Statement without subject}
+        \vspace{1em}
+        \normalsize
+        \inputCode[]{
+            minted language=kotlin,
+            title=\codeBlockTitle{when-without-subject.kts},
+        }{\codeDir/kotlin/when/without-subject.kts}
+    \end{frame}
+
+    \subsection{With Subject}\label{subsec:with-subject}
+    \begin{frame}[c]
+        \slidehead
+        \centering
+        \large
+        \textbf{When Statement with subject}
+        \vspace{1em}
+        \normalsize
+        \inputCode[]{
+            minted language=kotlin,
+            title=\codeBlockTitle{when/with-subject-1.kts},
+        }{\codeDir/kotlin/when/with-subject-1.kts}
+    \end{frame}
+
+    \begin{frame}[c]
+        \slidehead
+        \centering
+        \large
+        \textbf{Collapsing cases}
+        \vspace{1em}
+        \normalsize
+        \inputCode[]{
+            minted language=kotlin,
+            title=\codeBlockTitle{when/with-subject-2.kts},
+        }{\codeDir/kotlin/when/with-subject-2.kts}
+    \end{frame}
+
+    \begin{frame}[c]
+        \slidehead
+        \centering
+        \large
+        \textbf{Ranges}
+        \vspace{1em}
+        \normalsize
+        \inputCode[]{
+            minted language=kotlin,
+            title=\codeBlockTitle{when/with-subject-3.kts},
+        }{\codeDir/kotlin/when/with-subject-3.kts}
+    \end{frame}
+
+    \section{Function Syntax}\label{sec:function-syntax}
+
+    \begin{frame}[c]
+        \slidehead
+        \centering
+        \large
+        \textbf{Block Body}
+        \vspace{1em}
+        \normalsize
+        \inputCode[]{
+            minted language=kotlin,
+            title=\codeBlockTitle{functions-2.kts},
+        }{\codeDir/kotlin/functions-2.kts}
+    \end{frame}
+
+    \begin{frame}[c]
+        \slidehead
+        \centering
+        \large
+        \textbf{Expression Body}
+        \vspace{1em}
+        \normalsize
+        \inputCode[]{
+            minted language=kotlin,
+            title=\codeBlockTitle{functions-3.kts},
+        }{\codeDir/kotlin/functions-3a.kts}
+    \end{frame}
+
+    \begin{frame}[c]
+        \slidehead
+        \centering
+        \large
+        \textbf{Expression Body with implicit return type}
+        \vspace{1em}
+        \normalsize
+        \inputCode[]{
+            minted language=kotlin,
+            title=\codeBlockTitle{functions-3b.kts},
+        }{\codeDir/kotlin/functions-3b.kts}
+    \end{frame}
+
+    \section{Fibonacci Recursive Solution}\label{sec:fibonacci-recursive-solution}
+    \begin{frame}[c]
+        \slidehead
+        \centering
+        \large
+        \textbf{Fibonacci Recursive Solution}
+        \vspace{1em}
+        \normalsize
+        \inputCode[]{
+            minted language=kotlin,
+            title=\codeBlockTitle{fibonacci-recursive-solution.kts},
+        }{\codeDir/kotlin/fibonacci-recursive-solution.kts}
+    \end{frame}
+
+    \begin{frame}[c]
+        \slidehead
+        \centering
+        \large
+        \textbf{For-Loops}
+        \vspace{1em}
+        \normalsize
+        \inputCode[]{
+            minted language=kotlin,
+            title=\codeBlockTitle{for-loops-1.kts},
+        }{\codeDir/kotlin/for-loops-1.kts}
+    \end{frame}
+
+    \section{Challenge 3}\label{sec:challenge-3}
+    \begin{frame}[c, fragile]
+        \slidehead
+        \begin{columns}[c]
+            \begin{column}{.5\textwidth}
+                \Large
+                Rock Paper Scissors
+                \vspace{1em}
+                \normalsize
+
+                \begin{columns}[c]
+                    \begin{column}{.5\textwidth}
+                        \begin{onlyenv}<2->
+                            \mbox{}
+                            \\
+                            \textbf{Input:}
+                            \begin{codeBlock}{
+                                minted language=text,
+                                title=Example Input,
+                            }
+                                PR
+                                RR
+                                SS
+                                SR
+                                PS
+                            \end{codeBlock}
+                        \end{onlyenv}
+                    \end{column}
+                    \begin{column}{.5\textwidth}
+                        \begin{onlyenv}<3->
+                            \mbox{}
+                            \\
+                            \textbf{Output:}
+                            \begin{codeBlock}{
+                                minted language=text,
+                                title=Example Input,
+                            }
+                                P
+                                R
+                                S
+                                R
+                                S
+                            \end{codeBlock}
+                        \end{onlyenv}
+                    \end{column}
+                \end{columns}
+            \end{column}
+            \begin{column}{.5\textwidth}
+                \centering
+                \includesvg[scale=0.3]{../pictures/rock-paper-scissors}
+            \end{column}
+        \end{columns}
+    \end{frame}
+
+    \section{Deconstruction}\label{sec:deconstruction}
+
+    \subsection{Variables}\label{subsec:variables}
+    \begin{frame}[c]
+        \slidehead
+        \centering
+        \large
+        \textbf{Deconstructing a list}
+        \vspace{1em}
+        \normalsize
+        \inputCode[]{
+            minted language=kotlin,
+            title=\codeBlockTitle{variables-from-list.kts},
+        }{\codeDir/kotlin/deconstruction/variables-from-list.kts}
+    \end{frame}
+    \begin{frame}[c]
+        \slidehead
+        \centering
+        \large
+        \textbf{Deconstructing a string}
+        \vspace{1em}
+        \normalsize
+        \inputCode[]{
+            minted language=kotlin,
+            title=\codeBlockTitle{variables-from-string.kts},
+        }{\codeDir/kotlin/deconstruction/variables-from-string.kts}
+    \end{frame}
+
+    \subsection{Loops}\label{subsec:loops}
+    \begin{frame}[c]
+        \slidehead
+        \centering
+        \large
+        \textbf{For-Loops with Destructuring Declaration}
+        \vspace{1em}
+        \normalsize
+        \inputCode[]{
+            minted language=kotlin,
+            title=\codeBlockTitle{for-loops-2.kts},
+        }{\codeDir/kotlin/for-loops-2.kts}
+    \end{frame}
+
+    \section{Extension Function}\label{sec:extension-function}
+
+    \begin{frame}[c]
+        \slidehead
+        \centering
+        \large
+        \textbf{Extension Functions}
+        \vspace{1em}
+        \inputCode[]{
+            minted language=kotlin,
+            title=\codeBlockTitle{functions-4-parameter.kts},
+        }{\codeDir/kotlin/functions-4-parameter.kts}
+        \only<2->{
+            \inputCode[]{
+                minted language=kotlin,
+                title=\codeBlockTitle{functions-4-receiver.kts},
+            }{\codeDir/kotlin/functions-4-receiver.kts}
+        }
+    \end{frame}
+
+    \begin{frame}[c]
+        \slidehead
+        \centering
+        \large
+        \textbf{Extension Functions Second Example}
+        \vspace{1em}
+        \normalsize
+        \inputCode[]{
+            minted language=kotlin,
+            title=\codeBlockTitle{list-receiver-example.kts},
+        }{\codeDir/kotlin/list-receiver-example.kts}
+    \end{frame}
+
+    \section{Challenge 3-continued}\label{sec:challenge-3-cont}
+    \begin{frame}[c, fragile]
         \slidehead
         \begin{itemize}[<+->]
-            \item Create a new Kotlin project
-            \item Hello World!
+            \item Implement Challenge 4 using data class for game
+            \item + Extension function for calculating result of game
         \end{itemize}
+
     \end{frame}
 
-    \section{Challenge 2}\label{sec:challenge_2}
-    \begin{frame}
+    \section{Challenge 4}\label{sec:challenge-5}
+    \begin{frame}[c, fragile]
         \slidehead
-        \Large
-        Fibonacci!
+        \begin{columns}[c]
+            \begin{column}{.5\textwidth}
+                \Large
+                Rock Paper Scissors
+                \vspace{1em}
+                \normalsize
+
+                \begin{columns}[c]
+                    \begin{column}{.5\textwidth}
+                        \begin{onlyenv}<2->
+                            \mbox{}
+                            \\
+                            \textbf{Input:}
+                            \begin{codeBlock}{
+                                minted language=text,
+                                title=Example Input,
+                            }
+                                PRPS
+                                RRSR
+                                SPPR
+                                PRPS
+                                PSPS
+                            \end{codeBlock}
+                        \end{onlyenv}
+                    \end{column}
+                    \begin{column}{.5\textwidth}
+                        \begin{onlyenv}<3->
+                            \mbox{}
+                            \\
+                            \textbf{Output:}
+                            \begin{codeBlock}{
+                                minted language=text,
+                                title=Example Input,
+                            }
+                                S
+                                R
+                                S
+                                R
+                                S
+                            \end{codeBlock}
+                        \end{onlyenv}
+                    \end{column}
+                \end{columns}
+            \end{column}
+            \begin{column}{.5\textwidth}
+                \centering
+                \includesvg[scale=0.3]{../pictures/rock-paper-scissors}
+            \end{column}
+        \end{columns}
     \end{frame}
 \end{document}
