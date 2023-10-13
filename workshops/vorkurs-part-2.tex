@@ -1,0 +1,394 @@
+%! suppress = MissingImport
+\RequirePackage{import}
+\subimport{../common}{preamble}
+\subimport{../common}{packages}
+\subimport{../common}{vars}
+\begin{document}
+    \section{Kotlin}\label{sec:kotlin}
+    \begin{frame}[c]
+        \centering
+        \Large
+        \includesvg[scale=3]{../pictures/Kotlin-logo-2021}
+        \\
+        \pause
+        \textit{Vorkurs}
+        \pause
+        \textit{: Part II}
+    \end{frame}
+
+
+    \section{Was steht heute auf dem Plan}\label{sec:plan}
+    \begin{frame}[c]
+        \slidehead
+        \begin{itemize}
+            \item IDEs
+            \item \textbf{.kts} vs \textbf{.kt} Dateien
+            \item Nullability (und Null-Safety)
+            \item Klassen
+            \item Lambdas
+        \end{itemize}
+    \end{frame}
+
+
+    \section{IDE}\label{sec:ide}
+    \begin{frame}[c]
+        \slidehead
+        \Large
+        \centering
+        Was ist eine IDE?
+    \end{frame}
+
+    \begin{frame}[c]
+        \slidehead
+        IDE steht für \textit{Integrated Development Environment}
+        \pause
+        \begin{itemize}
+            [<+->]
+            \item Es gibt viele!
+            \begin{itemize}
+                \item VSCode
+                \item NetBeans
+                \item Eclipse
+                \item BlueJ
+                \item \textbf{IntelliJ} (für heute relevant)
+            \end{itemize}
+        \end{itemize}
+    \end{frame}
+
+    \subsection{IntelliJ Installieren}\label{subsec:intellij-installieren}
+    \begin{frame}[c]
+        \slidehead
+        \begin{itemize}
+            [<+->]
+            \item JetBrains Toolbox Herunterladen
+            \item Student-License beantragen \textit{(Optional, aber empfohlen)}
+            \item In Toolbox einloggen
+            \item IntelliJ Community bzw.~Ultimate via Toolbox installieren
+        \end{itemize}
+        \onslide<5->
+        \vspace{2em}
+        \small
+        \centering
+        \url{https://wiki.tudagrade.org/preparation/installation-intellij/}
+    \end{frame}
+
+
+    \section{\textbf{.kts} vs \textbf{.kt} Dateien}\label{sec:kts-kt-dateien}
+    \begin{frame}
+        \slidehead
+        \begin{columns}
+            \begin{column}{0.5\textwidth}
+                \begin{center}
+                    \large
+                    \textbf{.kts}
+                \end{center}
+                \begin{itemize}
+                    \item<2-> \textit{Script} Dateien
+                    \item<3-> Custom scripting context \textit{(z.B.~main, gradle)}
+                    \item<4-> Für kleine Projekte gut geeignet
+                    \item<5-> Direkter Einstiegspunkt (ohne Funktion)
+                    \item<10-> File > New Project > \textbf{Empty} Project in IntelliJ
+                \end{itemize}
+            \end{column}
+            \begin{column}{0.5\textwidth}
+                \begin{center}
+                    \large
+                    \textbf{.kt}
+                \end{center}
+                \begin{itemize}
+                    \item<6-> Normale \textit{Source} Dateien
+                    \item<7-> Für größere Projekte gut geeignet
+                    \item<8-> \textbf{fun main() { ... }} als Einstiegspunkt
+                    \item<9-> Mit Build-Tools wie z.B.~Gradle
+                    \item<10-> File > New Project > \textbf{New} Project
+                \end{itemize}
+            \end{column}
+        \end{columns}
+    \end{frame}
+
+    \subsection{Dependencies in \textbf{.kts} Dateien}\label{subsec:dependencies-in-kts-dateien}
+    \begin{frame}[c]
+        \slidehead
+        \begin{itemize}
+            [<+->]
+            \item Externe projekte können auch in \textbf{.main.kts} Dateien eingebunden werden
+            \item Diese nennt man \textbf{Dependencies}
+            \item Mit \textbf{@file:DependsOn("...")} können diese eingebunden werden
+            \item Alle packages auf \url{https://central.sonatype.com/} verfügbar
+            \item Beispiel: \textbf{@file:DependsOn("org.jline:jline:3.22.0")}
+            \item Weitere Repositories können via \textbf{@file:Repository("...")} eingebunden werden
+        \end{itemize}
+    \end{frame}
+
+    \livecoding
+
+    \subsection{Dependencies in \textbf{.kt} Dateien}\label{subsec:dependencies-in-kt-dateien}
+    \begin{frame}[c]
+        \slidehead
+        \begin{itemize}
+            [<+->]
+            \item Dependencies in normale Kotlin-Projekte einfügen sieht etwas anders aus
+            \item Es sind aber die selben Dependencies verfügbar
+            \item In der \textbf{build.gradle.kts} Datei können diese mit \textbf{implementation("...")} eingefügt werden
+            \item Beispiel:
+            \kotlinfile{../listings/gradle-dependency.gradle.kts}
+        \end{itemize}
+    \end{frame}
+
+    \livecoding
+
+
+    \section{Nullability}\label{sec:nullability}
+
+    \begin{frame}
+        \slidehead
+        \large
+        Was passiert wenn ein Wert nicht gesetzt ist?
+        \pause
+        \begin{onlyenv}<2>
+            \kotlinfile{../listings/to-int-or-null.kts}
+        \end{onlyenv}
+        \begin{onlyenv}<3>
+            \kotlinfile{../listings/to-int-or-null-fun.kts}
+        \end{onlyenv}
+        \begin{onlyenv}<4>
+            \kotlinfile{../listings/to-int-or-null-fun-typed.kts}
+        \end{onlyenv}
+    \end{frame}
+
+    \livecoding
+
+    \begin{frame}
+        \slidehead
+        \begin{itemize}
+            [<+->]
+            \item In Kotlin gibt es keine\footnote{Wenn man sich an den Regeln hält} \textit{Null-Pointer-Exceptions}
+            \item Es gibt \textbf{Nullable} und \textbf{Non-Nullable} Variablen
+            \item \textbf{Nullable} Variablen können \textbf{null} sein
+            \item \textbf{Non-Nullable} Variablen können \textbf{nicht null} sein
+            \item \textbf{Nullable} Typen werden mit \textbf{?} gekennzeichnet
+            \item \url{https://kotlinlang.org/docs/null-safety.html}
+        \end{itemize}
+    \end{frame}
+
+    \subsection{Elvis-Operator ?:}\label{subsec:elvis-operator}
+    \begin{frame}
+        \slidehead
+        \vspace{-1.5em}
+        \begin{itemize}
+            \item<1-> Mit dem Elvis-Operator \textbf{?:} können default Werte gesetzt werden
+            \item<2-> Beispiel:
+            \begin{onlyenv}<2>
+                \kotlinfile{../listings/to-int-or-null-fun-typed-if.kts}
+            \end{onlyenv}
+            \begin{onlyenv}<3>
+                \kotlinfile{../listings/to-int-or-null-fun-typed-elvis.kts}
+            \end{onlyenv}
+        \end{itemize}
+    \end{frame}
+
+    \subsection{Safe-Call-Operator ?.}\label{subsec:safe-call-operator}
+    \begin{frame}
+        \slidehead
+        \vspace{-1.5em}
+        \begin{itemize}
+            \item<1-> Mit dem Safe-Call-Operator \textbf{?.} können Funktionen und Attribute auf \textbf{Nullable} Ausdrücke aufgerufen werden
+            \item<2-> Beispiel:
+            \begin{onlyenv}<2>
+                \kotlinfile{../listings/string-length-nullable-java.kts}
+            \end{onlyenv}
+            \begin{onlyenv}<3>
+                \kotlinfile{../listings/string-length-nullable.kts}
+            \end{onlyenv}
+        \end{itemize}
+    \end{frame}
+
+    \subsection{Elvis-Operator ?. Pt. 2}\label{subsec:elvis-operator-pt-2}
+    \begin{frame}
+        \slidehead
+        \vspace{-1.5em}
+        \begin{itemize}
+            [<+->]
+            \item Der Elvis-Operator akzeptiert auch \textbf{control flow statements}
+            \begin{itemize}
+                \item \textbf{return}
+                \item \textbf{break}
+                \item \textbf{continue}
+            \end{itemize}
+            \item Beispiel: \kotlinfile{../listings/string-length-nullable-return.kts}
+        \end{itemize}
+    \end{frame}
+
+    \livecoding
+
+
+    \section{Klassen}
+    \begin{frame}[c]
+        \slidehead
+        \begin{itemize}
+            [<+->]
+            \item Klassen sind die Grundlage von \textbf{objektorientierte Programmierung}
+            \item Klassen sind \enquote{baupläne} für \textbf{Objekte}
+            \item Beispiel: \kotlinfile{../listings/class-pos.kts}
+            \item Der \textbf{Konstruktor} ist eine Funktion, die ein \textbf{Objekt} dieser Klasse \textbf{Instanziiert}
+            \item Beispiel: \kotlinfile{../listings/class-pos-constructor.kts}
+        \end{itemize}
+    \end{frame}
+
+    \subsection{Klassen mit Funktionen}\label{subsec:klassen-mit-funktionen}
+    \begin{frame}[c]
+        \slidehead
+        \begin{itemize}
+            [<+->]
+            \item Klassen können auch Funktionen enthalten
+            \item Beispiel: \kotlinfile{../listings/class-pos-fun.kts}
+        \end{itemize}
+    \end{frame}
+
+
+    \section{Exkurs: Funktionen}\label{sec:exkurs:-funktionen}
+    \begin{frame}
+        \slidehead
+        \vspace{-1.5em}
+        \begin{itemize}
+            [<+->]
+            \item Bis jetzt, haben wir Funktionen so geschrieben:
+            \kotlinfile{../listings/fun-normal.kts}
+            \item Diese können so aufgerufen werden:
+            \kotlinfile{../listings/fun-normal-call.kts}
+        \end{itemize}
+    \end{frame}
+
+    \subsection{Extension-Funktionen}\label{subsec:extension-funktionen}
+    \begin{frame}
+        \slidehead
+        \vspace{-1.5em}
+        \begin{itemize}
+            [<+->]
+            \item Eine \textbf{Extension-Funktion} ist eine Funktion, die auf einem Objekt aufgerufen werden kann
+            \item Diese Funktion ist aber nicht in der Klasse definiert
+            \item Ihr habt schon welche benutzt!
+            \begin{itemize}
+                \item \textbf{.toInt()}
+                \item \textbf{.toDouble()}
+            \end{itemize}
+            \item Beispiel: \kotlinfile{../listings/ext-fun-syntax.kts}
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}
+        \slidehead
+        \vspace{-1.5em}
+        \begin{itemize}
+            [<+->]
+            \item Innerhalb einer Extension-Funktion kann auf das \textbf{Receiver-Objekt} mit \textbf{this} zugegriffen werden
+            \item Beispiel: \kotlinfile[][top=0cm, bottom=0cm]{../listings/ext-fun-this.kts}
+            \item \textbf{this} kann auch meistens weggelassen werden
+            \item Beispiel: \kotlinfile[][top=0cm, bottom=0cm]{../listings/ext-fun-this-implicit.kts}
+        \end{itemize}
+    \end{frame}
+
+
+    \section{Challenge Rock Paper Scissors}\label{sec:challenge-rps}
+    \begin{frame}[c, fragile]
+        \slidehead
+        \begin{columns}[c]
+            \begin{column}{.5\textwidth}
+                \Large
+                \centering
+                Rock Paper Scissors\\
+                \textcolor{red}{Challenge}
+                \vspace{1em}
+                \normalsize
+
+                \begin{columns}[c]
+                    \begin{column}{.5\textwidth}
+                        \begin{onlyenv}<2->
+                            \mbox{}
+                            \\
+                            \textbf{Input:}
+                            \begin{codeBlock}{
+                                minted language=text,
+                                title=Example Input,
+                            }
+                                PRPS
+                                RRSR
+                                SPPR
+                                PRPS
+                                PSPS
+                            \end{codeBlock}
+                        \end{onlyenv}
+                    \end{column}
+                    \begin{column}{.5\textwidth}
+                        \begin{onlyenv}<3->
+                            \mbox{}
+                            \\
+                            \textbf{Output:}
+                            \begin{codeBlock}{
+                                minted language=text,
+                                title=Example Input,
+                            }
+                                S
+                                R
+                                S
+                                R
+                                S
+                            \end{codeBlock}
+                        \end{onlyenv}
+                    \end{column}
+                \end{columns}
+            \end{column}
+            \begin{column}{.5\textwidth}
+                \centering
+                \includesvg[scale=0.3]{../pictures/rock-paper-scissors}
+            \end{column}
+        \end{columns}
+    \end{frame}
+
+
+    \section{Lambdas}\label{sec:lambdas}
+    \begin{frame}[c]
+        \slidehead
+        \kotlinfile{../listings/for-each-question.kts}
+    \end{frame}
+
+
+    \begin{frame}[c]
+        \slidehead
+        \begin{itemize}
+            [<+->]
+            \item Lambdas sind \textbf{anonyme Funktionen}
+            \item Sie können als Parameter übergeben werden
+            \item Beispiel: \kotlinfile{../listings/for-each-lambda.kts}
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}[c]
+        \slidehead
+        Funktionen können mit der Syntax \textbf{::funktion} als \textbf{Method Reference} implizit in ein Lambda umgewandelt werden
+        \pause
+        \kotlinfile{../listings/for-each-lambda-method-ref.kts}
+    \end{frame}
+
+    \begin{frame}[c]
+        \slidehead
+        Es ist auch möglich, statt Funktion, explizit ein Lambda-Ausdruck in einer Variable speichern
+        \pause
+        \kotlinfile{../listings/for-each-lambda-val.kts}
+    \end{frame}
+
+    \begin{frame}[c]
+        \slidehead
+        Der Lambda-Ausdruck kann auch direkt als Parameter übergeben werden
+        \pause
+        \kotlinfile{../listings/for-each-lambda-inline.kts}
+    \end{frame}
+
+    \begin{frame}[c]
+        \slidehead
+        Der Parameter \textbf{it} kann man auch weg lassen
+        \pause
+        \kotlinfile{../listings/for-each-lambda-inline-implicit-parameter.kts}
+    \end{frame}
+
+\end{document}

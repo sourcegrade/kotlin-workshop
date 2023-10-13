@@ -1,0 +1,11 @@
+
+\DeclareDocumentCommand{\kotlinfile}{O{} O{} m}{\inputCode[#1]{minted language=kotlin,minted style/.expanded=\IfDarkModeTF{native}{friendly},#2}{#3}}
+
+\DeclareDocumentCommand{\livecoding}{}{
+    \begin{frame}[c]
+        \slidehead
+        \Huge
+        \centering
+        \textcolor{red}{Live-Coding}
+    \end{frame}
+}
